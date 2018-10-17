@@ -2,6 +2,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		// ex.1-15 (lesson 1-15)
+
 		// ex. 1
 		// simpleCalculator(1, 3, 4);
 
@@ -46,7 +48,7 @@ public class Main {
 		// findMinAndMax(new double[]{2, 3, 1, -1, 4, 0});
 
 		// ex. 12
-		changeMinAndMax(new int[] { 4, -5, 0, 6, 8 });
+		// changeMinAndMax(new int[] { 4, -5, 0, 6, 8 });
 
 		// ex. 13
 		// closedToDigitTen(8.5, 11.45);
@@ -56,6 +58,12 @@ public class Main {
 
 		// ex. 15
 		// pascalTriangle(10);
+
+		// example using logic
+		// logicTesting();
+
+		operatorsLearning();
+
 	}
 
 	// ex. 1
@@ -311,4 +319,62 @@ public class Main {
 
 	}
 
+	// example using logic
+	public static void logicTesting() {
+		boolean a = true;
+		boolean b = false;
+		boolean c = a | b;
+		boolean d = a & b;
+		boolean f = (!a & b) | (a & !b);
+		boolean g = !a;
+
+		System.out.println("a= " + a);
+		System.out.println("b= " + b);
+		System.out.println("c= " + c);
+		System.out.println("d= " + d);
+		System.out.println("f= " + f);
+		System.out.println("g= " + g);
+	}
+
+	// operators
+	// example using operators
+	public static void operatorsLearning() {
+		int a = 1;
+		int b = 2;
+		int c = 3;
+		a += 5;
+		b *= 4;
+		c += a * b;
+		c %= 6;
+		System.out.println(a);
+		System.out.println(a = b);
+		System.out.println(c);
+
+	}
+
+	// test sprawdzaj¹ccy
+	// a) róznica miêdzy przedrostkow¹ i przyrostkow¹ form¹ operatora inkremetnacji
+	// przedrostkowa wykonuje siê przed wykorzystaniem zmiennej a ta druga po
+
+	// b) jak zapisujemy operator przesuniêcia w prawo (bez znaku)?
+	// >>>
+	// to sprawdziæ
+
+	// c) jaki bêdzie wynik wyrazenia i wartosci x po oblicz.
+	// int a=0;
+	// print(++a==a++);
+	// true
+
+	// d) jaki wynik
+	// int a=0, b=0;
+	// print((++a==1) || (b++==1));
+	// true
+
+	// e
+	// W jaki sposob mozna uzyc operatora warunkoweo AND, aby zapobiec dzieleniu
+	// przez zero?
+
+	// f
+	// Czy operator bitowych mozna uzyc dla typu dobule
+	// nie - tylko dla ca³kowitych mo¿na
 }
