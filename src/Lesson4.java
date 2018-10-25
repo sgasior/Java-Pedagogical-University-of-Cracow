@@ -109,9 +109,8 @@ public class Lesson4 {
 		List<String> simetricTime = new ArrayList<>();
 		for (int i = 0; i < hoursPerDay.length; i++) {
 			for (int j = 0; j < minutesPerHouer.length; j++) {
-				if (hoursPerDay[i].equals(minutesPerHouer[j])
-						|| (hoursPerDay[i].substring(1)).equals(minutesPerHouer[j].substring(0, 1))
-								&& (hoursPerDay[i].substring(0, 1)).equals(minutesPerHouer[j].substring(1))
+				if ((hoursPerDay[i].substring(1)).equals(minutesPerHouer[j].substring(0, 1))
+						&& (hoursPerDay[i].substring(0, 1)).equals(minutesPerHouer[j].substring(1))
 
 				) {
 					simetricTime.add(hoursPerDay[i] + ":" + minutesPerHouer[j]);
