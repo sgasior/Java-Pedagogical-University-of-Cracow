@@ -4,6 +4,9 @@ import java.util.Random;
 
 public class Lesson8 {
 
+	// zad.7
+	public static int counter = 0;
+
 	public static void main(String[] args) {
 
 		// zad.1
@@ -17,10 +20,19 @@ public class Lesson8 {
 
 		// zad.4
 
-		printTable(sortAscendingStrings(new String[] { "Maria Sk�odowska Curie", "Henryk Sienkiewicz",
-				"W�adys�aw Reymont", "Czes�aw Mi�osz", "J�zef Rotbalt", "Lech Wa��sa", "Wies�awa Szymborska" }));
+		// printTable(sortAscendingStrings(new String[] { "Maria Sk³odowska Curie",
+		// "Henryk Sienkiewicz",
+		// "W³adys³aw Reymont", "Czes³aw Mi³osz", "Józef Rotbalt", "Lech Wa³êsa",
+		// "Wies³awa Szymborska" }));
 
-		howManyFibCanWeCalculate(1);
+		// zad.5 i 6
+		// howManyFibCanWeCalculate(1);
+
+		// zad.7
+		fibonacci(15);
+		System.out.println(
+				"Przy obliczaniu fib(15) " + " konieczne było obliczenie czwartego elementu: " + counter + " razy");
+
 	}
 
 	// zad.1
@@ -71,6 +83,11 @@ public class Lesson8 {
 	}
 
 	public static long fibonacci(int n) {
+
+		if (n == 4) {
+			counter++;
+		}
+
 		if (n == 0)
 			return 0;
 		else if (n == 1)
@@ -79,9 +96,8 @@ public class Lesson8 {
 			return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 
-	// zad.6 i zad.7
+	// zad.6
 	// obliczanie fib(50) wynosi 47s natomiast fib(51) juz 77s.
-	// korzystajac z algorytmu iteracyjnego fib(51) 76s natomiast fib(52)
 	public static void howManyFibCanWeCalculate(long minutes) {
 		long duration = 0;
 		int i = 0;
@@ -92,18 +108,25 @@ public class Lesson8 {
 
 			if (i <= 50) {
 				long start = System.currentTimeMillis();
-				System.out.println("Liczba fib dla i= " + i + " wynosi: " + fibonacci(i));
-				i++;
+				long fib = fibonacci(i);
+
+				if (i == 49) {
+					elementA = fib;
+				}
+
+				if (i == 50) {
+					elementB = fib;
+				}
+				System.out.println("Liczba fib dla i= " + i + " wynosi: " + fib);
 				long end = System.currentTimeMillis();
 				duration = end - start;
 				System.out.println("Duration= " + duration / 1000 + " sek.");
-			} else {
+
+				i++;
+
+			} else if (i <= 80) {
 				System.out.println("else");
 				long start = System.currentTimeMillis();
-				if (i == 50) {
-					elementA = fibonacci(i - 2);
-					elementB = fibonacci(i - 1);
-				}
 				result = elementA + elementB;
 				elementA = elementB;
 				elementB = result;
@@ -112,10 +135,12 @@ public class Lesson8 {
 				long end = System.currentTimeMillis();
 				duration = end - start;
 				System.out.println("Duration= " + duration / 1000 + " sek.");
+			} else {
+				break;
 			}
 
-		} while (true);
-		// while (duration <= minutes * 1000 * 60);
+		} while (duration <= minutes * 1000 * 60);
+
 	}
 
 }
