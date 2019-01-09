@@ -53,15 +53,15 @@ public class Triangle {
 				+ "]";
 	}
 
-	public double Circuit() {
+	public double circuit() {
 		double distAB = this.coordinateA.distanceBetweenPoints(this.coordinateB);
 		double distAC = this.coordinateA.distanceBetweenPoints(this.coordinateC);
 		double distBC = this.coordinateB.distanceBetweenPoints(this.coordinateC);
 		return distAB + distAC + distBC;
 	}
 
-	public double Area() {
-		double p = this.Circuit() / 2;
+	public double area() {
+		double p = this.circuit() / 2;
 		double distAB = this.coordinateA.distanceBetweenPoints(this.coordinateB);
 		double distAC = this.coordinateA.distanceBetweenPoints(this.coordinateC);
 		double distBC = this.coordinateB.distanceBetweenPoints(this.coordinateC);
@@ -69,15 +69,79 @@ public class Triangle {
 
 	}
 
+	public Coordinate centerGravity() {
+
+		double Qx = (coordinateA.getX() + coordinateB.getX() + coordinateC.getX()) / 3;
+		double Qy = (coordinateA.getY() + coordinateB.getY() + coordinateC.getY()) / 3;
+		return new Coordinate(Qx, Qy);
+
+	}
+
+	public void rotateTriangle(Coordinate aroundCoordinate, double angle) {
+
+		double degreestoRadiansConts = 0.01745329;
+
+		if (aroundCoordinate == coordinateA) {
+			coordinateB.setX(((coordinateB.getX() * Math.cos(angle * degreestoRadiansConts)
+					- coordinateB.getY() * Math.sin((angle * degreestoRadiansConts)))));
+
+			coordinateB.setY(((coordinateB.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateB.getY() * Math.cos((angle * degreestoRadiansConts))));
+
+			coordinateC.setX(((coordinateC.getX() * Math.cos(angle * degreestoRadiansConts))
+					- coordinateC.getY() * Math.sin((angle * degreestoRadiansConts))));
+
+			coordinateC.setY(((coordinateC.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateC.getY() * Math.cos((angle * degreestoRadiansConts))));
+
+		} else if (aroundCoordinate == coordinateB) {
+			coordinateA.setX(((coordinateA.getX() * Math.cos(angle * degreestoRadiansConts))
+					- coordinateA.getY() * Math.sin((angle * degreestoRadiansConts))));
+
+			coordinateA.setY(((coordinateA.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateA.getY() * Math.cos((angle * degreestoRadiansConts))));
+
+			coordinateC.setX(((coordinateC.getX() * Math.cos(angle * degreestoRadiansConts))
+					- coordinateC.getY() * Math.sin((angle * degreestoRadiansConts))));
+
+			coordinateC.setY(((coordinateC.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateC.getY() * Math.cos((angle * degreestoRadiansConts))));
+
+		} else {
+
+			coordinateA.setX(((coordinateA.getX() * Math.cos(angle * degreestoRadiansConts))
+					- coordinateA.getY() * Math.sin((angle * degreestoRadiansConts))));
+
+			coordinateA.setY(((coordinateA.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateA.getY() * Math.cos((angle * degreestoRadiansConts))));
+
+			coordinateB.setX(((coordinateB.getX() * Math.cos(angle * degreestoRadiansConts))
+					- coordinateB.getY() * Math.sin((angle * degreestoRadiansConts))));
+
+			coordinateB.setY(((coordinateB.getX() * Math.sin(angle * degreestoRadiansConts))
+					+ coordinateB.getY() * Math.cos((angle * degreestoRadiansConts))));
+		}
+
+	}
+
+	private void rotate(Coordinate coordinate) {
+
+	}
+
 	public static void main(String[] args) {
 		// Triangle triangle = new Triangle(new Coordinate(2, 1), new Coordinate(4, 5),
 		// new Coordinate(-3, -9));
-		Triangle triangle = new Triangle();
+		Triangle triangle = new Triangle(new Coordinate(1, -3), new Coordinate(2, 8), new Coordinate(-6, 4));
 		triangle.print();
-		System.out.println("Obwód wynosi: " + triangle.Circuit());
-		System.out.println("Pole wynosi: " + triangle.Area());
+		System.out.println("Obwód wynosi: " + triangle.circuit());
+		System.out.println("Pole wynosi: " + triangle.area());
 		System.out.println("Czy punkty s¹ wspó³liniowe: "
 				+ triangle.getCoordinateA().isCollinear(triangle.getCoordinateB(), triangle.coordinateC));
+		System.out.println("Œrodek masy trójk¹ta to " + triangle.centerGravity());
+
+		System.out.println("Obrót o 360 stopni:");
+		triangle.rotateTriangle(triangle.getCoordinateB(), 360);
+		triangle.print();
 	}
 
 	public Coordinate getCoordinateA() {
@@ -107,39 +171,38 @@ public class Triangle {
 }
 
 class Coordinate {
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 
 	public Coordinate() {
 
 	}
 
-	public Coordinate(int x, int y) {
-		super();
+	public Coordinate(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setX(double d) {
+		this.x = d;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 
 	public double distanceBetweenPoints(Coordinate other) {
 
-		int distInX = Math.abs(this.x - other.getX());
-		int distInY = Math.abs(this.y - other.getY());
+		double distInX = Math.abs(this.x - other.getX());
+		double distInY = Math.abs(this.y - other.getY());
 		return Math.sqrt(Math.pow(distInX, 2) + Math.pow(distInY, 2));
 	}
 
